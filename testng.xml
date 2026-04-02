@@ -1,0 +1,7 @@
+<suite name="test">
+    <test name="tenforce test">
+        <classes>
+            <class name="tests.FullFlowTest"/>
+        </classes>
+    </test>
+</suite>
