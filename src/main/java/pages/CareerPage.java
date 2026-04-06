@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,10 +20,10 @@ public class CareerPage {
 
     By jobOpening = By.xpath("//a[@href='#job']");
 
-    By actual = By.xpath("//div[@class='h4']/span[text()='Feel free to send your CV to']");
+    By textString = By.xpath("//div[@class='h4']/span");
     public CareerPage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public void careerClick(){
@@ -33,7 +35,10 @@ public class CareerPage {
     }
 
     public void twoInternClick(){
-        wait.until(ExpectedConditions.elementToBeClickable(twoIntern)).click();
+
+        WebElement element = driver.findElement(twoIntern);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
     }
 
     public void naviagteBack(){
@@ -45,7 +50,7 @@ public class CareerPage {
     }
 
     public String getValue(){
-        String text = driver.findElement(actual).getText();
+        String text = driver.findElement(textString).getText();
         return text;
     }
 
